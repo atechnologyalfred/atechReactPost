@@ -4,16 +4,25 @@ import DisplayForm from "./DisplayForm";
 function App (){
   const [values, setValues ] = useState([]);
   const getData = (data) =>  {
-    data.id = new Date()
+    data.id = Date.now();
     setValues([...values, data]);
-    console.log(values);
   }
+
+const handleEdit = (id)=> {
+
+}
+const handleDelete = (id)=> {
+  console.log(id)
+  const newValues = values.filter(value=> value.id !== id);
+  setValues(newValues)
+}
+
   return (
     <>
     <div className="container">
   <Form  onSave = {getData}/>
   <ul >
-    {values.map((value, idx)=> <DisplayForm  key={idx} {...value} />)}
+    {values.map((value, idx)=> <DisplayForm  key={idx} {...value}  handleDelete={handleDelete} handleEdit={handleEdit} />)}
   </ul>
   </div>
     </>
